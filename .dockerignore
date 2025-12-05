@@ -1,0 +1,88 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info
+dist
+build
+eggs
+.eggs
+lib
+lib64
+parts
+sdist
+var
+wheels
+pip-wheel-metadata
+share/python-wheels
+*.manifest
+*.spec
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing and Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.hypothesis/
+coverage/
+*.cover
+.cache
+
+# Linting
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+
+# Documentation
+docs/_build/
+site/
+
+# CI/CD
+.github/
+
+# Local development
+*.log
+logs/
+.env.local
+.env.*.local
+
+# Project specific
+temp/
+tmp/
+*.bak
+*.swp
+
+# Keep these files for Docker build
+!pyproject.toml
+!uv.lock
+!src/
+!tests/
+!README.md
+!LICENSE

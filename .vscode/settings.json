@@ -1,0 +1,64 @@
+{
+	// ========== Python Formatting Settings ==========
+	"[python]": {
+		"editor.defaultFormatter": "charliermarsh.ruff",
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.fixAll": "explicit",
+			"source.organizeImports": "explicit"
+		}
+	},
+
+	// ========== Markdown Formatting Settings ==========
+	"[markdown]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true
+	},
+
+	// ========== JSON/YAML Formatting Settings ==========
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true
+	},
+	"[yaml]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true
+	},
+
+	// ========== Shell Script Formatting ==========
+	"[shellscript]": {
+		"editor.defaultFormatter": "foxundermoon.shell-format",
+		"editor.formatOnSave": true
+	},
+
+	// ========== File Associations ==========
+	"files.associations": {
+		"*.mdc": "markdown",
+		"*.env*": "dotenv"
+	},
+
+	// ========== Python Testing ==========
+	"python.testing.pytestEnabled": true,
+	"python.testing.pytestArgs": ["tests"],
+	"python.testing.unittestEnabled": false,
+
+	// ========== Code Runner ==========
+	"code-runner.clearPreviousOutput": true,
+	"code-runner.saveFileBeforeRun": true,
+
+	// ========== Python Analysis ==========
+	"python.terminal.activateEnvironment": true,
+	"python.analysis.typeCheckingMode": "basic",
+	"python.analysis.diagnosticSeverityOverrides": {
+		"reportUnknownParameterType": "none",
+		"reportUnknownVariableType": "none",
+		"reportUnknownMemberType": "none",
+		"reportUnknownArgumentType": "none",
+		"reportUnknownLambdaType": "none",
+		"reportImplicitStringConcatenation": "none"
+	}
+}

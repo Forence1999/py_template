@@ -1,0 +1,199 @@
+name: Release
+
+on:
+    push:
+        tags:
+            - 'v*.*.*'
+    workflow_dispatch:
+        inputs:
+            version:
+                description: 'Version to release (e.g., 0.1.0)'
+                required: true
+                type: string
+
+permissions:
+    contents: write
+    packages: write
+
+jobs:
+    build:
+        name: Build Distribution
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Install uv
+              uses: astral-sh/setup-uv@v2
+
+            - name: Set up Python
+              run: uv python install 3.12
+
+            - name: Install build dependencies
+              run: uv add --dev build twine
+
+            - name: Build package
+              run: uv run python -m build
+
+            - name: Check distribution
+              run: uv run twine check dist/*
+
+            - name: Upload artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                  name: distributions
+                  path: dist/
+
+    publish-github:
+        name: Publish GitHub Release
+        needs: build
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Download artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  name: distributions
+                  path: dist/
+
+            - name: Extract version from tag
+              id: version
+              run: |
+                  if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+                    echo "version=${{ inputs.version }}" >> $GITHUB_OUTPUT
+                  else
+                    echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+                  fi
+
+            - name: Generate changelog
+              id: changelog
+              run: |
+                  # Extract changelog for this version
+                  VERSION=${{ steps.version.outputs.version }}
+                  if [ -f CHANGELOG.md ]; then
+                    # Get changelog content between version headers
+                    CHANGELOG=$(sed -n "/## \[${VERSION}\]/,/## \[/p" CHANGELOG.md | sed '$d' | tail -n +2)
+                    if [ -z "$CHANGELOG" ]; then
+                      CHANGELOG="See CHANGELOG.md for details"
+                    fi
+                  else
+                    CHANGELOG="Release version ${VERSION}"
+                  fi
+                  echo "changelog<<EOF" >> $GITHUB_OUTPUT
+                  echo "$CHANGELOG" >> $GITHUB_OUTPUT
+                  echo "EOF" >> $GITHUB_OUTPUT
+
+            - name: Create GitHub Release
+              uses: softprops/action-gh-release@v1
+              with:
+                  tag_name: v${{ steps.version.outputs.version }}
+                  name: Release v${{ steps.version.outputs.version }}
+                  body: ${{ steps.changelog.outputs.changelog }}
+                  draft: false
+                  prerelease: false
+                  files: |
+                      dist/*.tar.gz
+                      dist/*.whl
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # Uncomment this job if you want to publish to PyPI
+    # publish-pypi:
+    #     name: Publish to PyPI
+    #     needs: build
+    #     runs-on: ubuntu-latest
+    #     environment:
+    #         name: pypi
+    #         url: https://pypi.org/project/py_template/
+    #
+    #     steps:
+    #         - name: Download artifacts
+    #           uses: actions/download-artifact@v4
+    #           with:
+    #               name: distributions
+    #               path: dist/
+    #
+    #         - name: Publish to PyPI
+    #           uses: pypa/gh-action-pypi-publish@release/v1
+    #           with:
+    #               password: ${{ secrets.PYPI_API_TOKEN }}
+
+    # Uncomment this job if you want to publish to a private package repository
+    # publish-private:
+    #     name: Publish to Private Repository
+    #     needs: build
+    #     runs-on: ubuntu-latest
+    #
+    #     steps:
+    #         - name: Download artifacts
+    #           uses: actions/download-artifact@v4
+    #           with:
+    #               name: distributions
+    #               path: dist/
+    #
+    #         - name: Install uv
+    #           uses: astral-sh/setup-uv@v2
+    #
+    #         - name: Set up Python
+    #           run: uv python install 3.12
+    #
+    #         - name: Install twine
+    #           run: uv add --dev twine
+    #
+    #         - name: Publish to private repository
+    #           env:
+    #               TWINE_USERNAME: ${{ secrets.PRIVATE_REPO_USERNAME }}
+    #               TWINE_PASSWORD: ${{ secrets.PRIVATE_REPO_PASSWORD }}
+    #               TWINE_REPOSITORY_URL: ${{ secrets.PRIVATE_REPO_URL }}
+    #           run: uv run twine upload dist/*
+
+    notify:
+        name: Send Notification
+        needs: [build, publish-github]
+        runs-on: ubuntu-latest
+        if: always()
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Extract version
+              id: version
+              run: |
+                  if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+                    echo "version=${{ inputs.version }}" >> $GITHUB_OUTPUT
+                  else
+                    echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+                  fi
+
+            - name: Determine status
+              id: status
+              run: |
+                  if [ "${{ needs.publish-github.result }}" = "success" ]; then
+                    echo "status=✅ Success" >> $GITHUB_OUTPUT
+                    echo "color=good" >> $GITHUB_OUTPUT
+                  else
+                    echo "status=❌ Failed" >> $GITHUB_OUTPUT
+                    echo "color=danger" >> $GITHUB_OUTPUT
+                  fi
+
+            - name: Summary
+              run: |
+                  echo "## Release Summary" >> $GITHUB_STEP_SUMMARY
+                  echo "" >> $GITHUB_STEP_SUMMARY
+                  echo "**Version:** v${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+                  echo "**Status:** ${{ steps.status.outputs.status }}" >> $GITHUB_STEP_SUMMARY
+                  echo "" >> $GITHUB_STEP_SUMMARY
+                  echo "### Jobs Status" >> $GITHUB_STEP_SUMMARY
+                  echo "- Build: ${{ needs.build.result }}" >> $GITHUB_STEP_SUMMARY
+                  echo "- GitHub Release: ${{ needs.publish-github.result }}" >> $GITHUB_STEP_SUMMARY
+                  echo "" >> $GITHUB_STEP_SUMMARY
+                  if [ "${{ needs.publish-github.result }}" = "success" ]; then
+                    echo "🎉 Release v${{ steps.version.outputs.version }} published successfully!" >> $GITHUB_STEP_SUMMARY
+                    echo "" >> $GITHUB_STEP_SUMMARY
+                    echo "**Download:** [GitHub Releases](https://github.com/${{ github.repository }}/releases/tag/v${{ steps.version.outputs.version }})" >> $GITHUB_STEP_SUMMARY
+                  fi

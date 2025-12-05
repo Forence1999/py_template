@@ -1,0 +1,182 @@
+version: '3.8'
+
+# Docker Compose configuration for py_template
+# Provides development, testing, and runtime environments
+
+services:
+    # ========================================================================
+    # Development Environment
+    # ========================================================================
+    dev:
+        build:
+            context: .
+            target: development
+            dockerfile: Dockerfile
+        image: py_template:dev
+        container_name: py_template-dev
+        volumes:
+            # Mount source code for live development
+            - ./src:/app/src:ro
+            - ./tests:/app/tests:ro
+            - ./docs:/app/docs:ro
+            # Mount configuration files
+            - ./pyproject.toml:/app/pyproject.toml:ro
+            - ./.env:/app/.env:ro
+        environment:
+            - PYTHONPATH=/app/src
+            - DEBUG=true
+            - LOG_LEVEL=DEBUG
+        command: bash
+        stdin_open: true
+        tty: true
+        networks:
+            - py_template-network
+
+    # ========================================================================
+    # Testing Environment
+    # ========================================================================
+    test:
+        build:
+            context: .
+            target: testing
+            dockerfile: Dockerfile
+        image: py_template:test
+        container_name: py_template-test
+        volumes:
+            - ./src:/app/src:ro
+            - ./tests:/app/tests:ro
+            - ./coverage:/app/coverage
+        environment:
+            - PYTHONPATH=/app/src
+            - PYTEST_ARGS=-v --cov=src --cov-report=html --cov-report=term
+        command: pytest ${PYTEST_ARGS}
+        networks:
+            - py_template-network
+
+    # ========================================================================
+    # Runtime Environment
+    # ========================================================================
+    runtime:
+        build:
+            context: .
+            target: runtime
+            dockerfile: Dockerfile
+        image: py_template:latest
+        container_name: py_template-runtime
+        volumes:
+            - ./src:/app/src:ro
+        environment:
+            - PYTHONPATH=/app/src
+        command: py_template info
+        networks:
+            - py_template-network
+
+    # ========================================================================
+    # Interactive Python Shell with py_template
+    # ========================================================================
+    shell:
+        build:
+            context: .
+            target: runtime
+            dockerfile: Dockerfile
+        image: py_template:latest
+        container_name: py_template-shell
+        volumes:
+            - ./src:/app/src:ro
+        environment:
+            - PYTHONPATH=/app/src
+        command: python
+        stdin_open: true
+        tty: true
+        networks:
+            - py_template-network
+
+    # ========================================================================
+    # Code Quality Checks
+    # ========================================================================
+    lint:
+        build:
+            context: .
+            target: development
+            dockerfile: Dockerfile
+        image: py_template:dev
+        container_name: py_template-lint
+        volumes:
+            - ./src:/app/src:ro
+            - ./tests:/app/tests:ro
+        environment:
+            - PYTHONPATH=/app/src
+        command: >
+            sh -c "
+            echo '=== Running Ruff linting ===' &&
+            ruff check src tests &&
+            echo '=== Running Ruff format check ===' &&
+            ruff format --check src tests
+            "
+        networks:
+            - py_template-network
+
+    # ========================================================================
+    # Documentation Builder (Optional)
+    # ========================================================================
+    docs:
+        build:
+            context: .
+            target: development
+            dockerfile: Dockerfile
+        image: py_template:dev
+        container_name: py_template-docs
+        volumes:
+            - ./src:/app/src:ro
+            - ./docs:/app/docs
+        environment:
+            - PYTHONPATH=/app/src
+        command: echo "Documentation builder - Add your docs build command here"
+        networks:
+            - py_template-network
+
+networks:
+    py_template-network:
+        driver: bridge
+
+# ============================================================================
+# Usage Examples:
+# ============================================================================
+#
+# Start development environment:
+#   docker-compose up dev
+#
+# Run tests:
+#   docker-compose up test
+#   docker-compose run --rm test
+#
+# Run specific tests:
+#   docker-compose run --rm test pytest tests/unit/test_models.py
+#
+# Run linting:
+#   docker-compose up lint
+#   docker-compose run --rm lint
+#
+# Interactive Python shell:
+#   docker-compose run --rm shell
+#
+# Run CLI command:
+#   docker-compose run --rm runtime py_template info
+#
+# Development workflow:
+#   docker-compose run --rm dev bash
+#   # Inside container:
+#   pytest
+#   ruff check src
+#   py_template info
+#
+# Run all quality checks:
+#   docker-compose up --abort-on-container-exit lint test
+#
+# Clean up:
+#   docker-compose down
+#   docker-compose down -v  # Remove volumes too
+#
+# Rebuild:
+#   docker-compose build --no-cache
+#   docker-compose up --build

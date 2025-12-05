@@ -1,0 +1,26 @@
+name: Code Quality
+
+on:
+    push:
+        branches: [main, dev]
+    pull_request:
+        branches: [main, dev]
+
+jobs:
+    code-quality:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Run Ruff linting
+              uses: astral-sh/ruff-action@v3
+              with:
+                  version: "0.13.2"
+                  args: "check --output-format=github"
+
+            - name: Run Ruff formatting check
+              uses: astral-sh/ruff-action@v3
+              with:
+                  version: "0.13.2"
+                  args: "format --check --diff"

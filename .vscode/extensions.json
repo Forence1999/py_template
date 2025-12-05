@@ -1,0 +1,33 @@
+{
+	"recommendations": [
+		// Python Core Extensions
+		"ms-python.python",
+		"ms-python.vscode-pylance",
+		"ms-python.debugpy",
+		"ms-python.vscode-python-envs",
+		"donjayamanne.python-extension-pack",
+
+		// Formatting Extensions (格式化插件)
+		"charliermarsh.ruff",
+		"esbenp.prettier-vscode",
+		"editorconfig.editorconfig",
+		"foxundermoon.shell-format",
+
+		// Configuration File Support
+		"tamasfe.even-better-toml",
+		"redhat.vscode-yaml",
+		"mikestead.dotenv",
+
+		// Git & GitHub Integration
+		"github.vscode-pull-request-github",
+		"eamodio.gitlens",
+		"mhutchie.git-graph",
+
+		// Development Tools
+		"formulahendry.code-runner",
+		"aaron-bond.better-comments",
+		"github.copilot",
+		"github.copilot-chat",
+		"bar.python-import-helper"
+	]
+}

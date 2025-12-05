@@ -1,0 +1,45 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Python: Current File",
+			"type": "python",
+			"request": "launch",
+			"program": "${file}",
+			"console": "integratedTerminal",
+			"justMyCode": true,
+			"env": {
+				"PYTHONPATH": "${workspaceFolder}/src"
+			}
+		},
+		{
+			"name": "Python: py_template CLI",
+			"type": "python",
+			"request": "launch",
+			"module": "py_template.cli.commands",
+			"console": "integratedTerminal",
+			"justMyCode": true,
+			"env": {
+				"PYTHONPATH": "${workspaceFolder}/src"
+			}
+		},
+		{
+			"name": "Python: pytest - Current File",
+			"type": "python",
+			"request": "launch",
+			"module": "pytest",
+			"args": ["${file}", "-v"],
+			"console": "integratedTerminal",
+			"justMyCode": true
+		},
+		{
+			"name": "Python: pytest - All Tests",
+			"type": "python",
+			"request": "launch",
+			"module": "pytest",
+			"args": ["-v", "--cov=src", "--cov-report=html"],
+			"console": "integratedTerminal",
+			"justMyCode": true
+		}
+	]
+}
