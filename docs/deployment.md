@@ -162,7 +162,7 @@ The project includes pre-configured workflows:
 
 ### Release Process
 
-1. Update version in [src/py_template/__version__.py](src/py_template/__version__.py)
+1. Update version in [src/py_template/**version**.py](src/py_template/__version__.py)
 2. Update [CHANGELOG.md](CHANGELOG.md)
 3. Create a git tag:
    ```bash

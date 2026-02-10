@@ -51,11 +51,13 @@ docker run -it --rm -v $(pwd)/src:/app/src py_template:dev bash
 **Purpose:** Full development environment with all dependencies
 
 **Includes:**
+
 - All development dependencies (pytest, ruff, etc.)
 - Testing tools
 - Development utilities
 
 **Usage:**
+
 ```bash
 # Build
 docker build --target development -t py_template:dev .
@@ -79,11 +81,13 @@ py_template info
 **Purpose:** Minimal image for using py_template library
 
 **Includes:**
+
 - Python runtime
 - py_template and its dependencies
 - No development tools
 
 **Usage:**
+
 ```bash
 # Build
 docker build --target runtime -t py_template:latest .
@@ -102,11 +106,13 @@ docker run -it --rm py_template:latest python
 **Purpose:** Run tests with coverage
 
 **Includes:**
+
 - All test dependencies
 - Test files
 - Coverage tools
 
 **Usage:**
+
 ```bash
 # Build
 docker build --target testing -t py_template:test .
@@ -346,6 +352,7 @@ docker builder prune
 ### Layer Optimization
 
 The Dockerfile uses multi-stage builds to:
+
 1. Separate build dependencies from runtime
 2. Cache dependency installations
 3. Minimize final image size
@@ -423,6 +430,7 @@ COPY src/ ./src/
 ### 3. Use .dockerignore
 
 Exclude unnecessary files to speed up builds:
+
 - `.git/`
 - `__pycache__/`
 - `.venv/`
@@ -475,15 +483,15 @@ spec:
   template:
     spec:
       containers:
-      - name: app
-        image: registry.example.com/py_template:0.1.0
-        resources:
-          requests:
-            memory: "128Mi"
-            cpu: "250m"
-          limits:
-            memory: "256Mi"
-            cpu: "500m"
+        - name: app
+          image: registry.example.com/py_template:0.1.0
+          resources:
+            requests:
+              memory: '128Mi'
+              cpu: '250m'
+            limits:
+              memory: '256Mi'
+              cpu: '500m'
 ```
 
 ## Maintenance

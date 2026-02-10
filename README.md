@@ -19,11 +19,13 @@ A minimal Python project template with modern tooling and best practices.
 ### Using This Template
 
 **Option 1: Use as GitHub Template**
+
 1. Click "Use this template" button on GitHub
 2. Clone your new repository
 3. Follow customization steps below
 
 **Option 2: Manual Setup**
+
 ```bash
 # Clone this repository
 git clone <this-repo> my-project
@@ -140,6 +142,7 @@ See [Template Usage Guide](docs/TEMPLATE_USAGE.md) for detailed steps.
 ### Adapt Example Modules
 
 The template includes example service modules:
+
 - **Keep them** if they fit your use case
 - **Replace them** with your own modules
 - **Remove them** if you don't need them
@@ -160,6 +163,17 @@ The template includes example service modules:
 - GitHub Actions workflows for CI/CD
 - Code coverage reporting
 - Security scanning (Bandit + Safety)
+
+### Code Style
+
+This project follows industry-standard indentation conventions:
+
+- **Python**: 4 spaces (PEP 8)
+- **JSON/YAML**: 2 spaces
+- **Markdown/HTML/XML**: 2 spaces
+- **Shell scripts**: 2 spaces
+
+All formatting is enforced via EditorConfig, Prettier, and Ruff.
 
 ### Docker Support
 

@@ -47,6 +47,7 @@ git push origin v0.2.0
 ```
 
 The workflow will automatically:
+
 - Build distribution packages
 - Create GitHub release with changelog
 - Upload artifacts (`.tar.gz` and `.whl` files)
@@ -75,6 +76,7 @@ Examples:
 ```
 
 **Pre-release versions:**
+
 - `0.1.0-alpha.1` - Alpha release
 - `0.1.0-beta.1` - Beta release
 - `0.1.0-rc.1` - Release candidate
@@ -132,6 +134,7 @@ If you want to publish to PyPI, uncomment the `publish-pypi` job in `.github/wor
 ### Note for Proprietary Software
 
 Since py_template is proprietary software:
+
 - **DO NOT** publish to public PyPI
 - Use private package repository instead
 - Or distribute via GitHub releases only
@@ -177,6 +180,7 @@ unzip -l dist/py_template-0.1.0-py3-none-any.whl
 ```
 
 Built packages will be in `dist/` directory:
+
 - `py_template-0.1.0.tar.gz` - Source distribution
 - `py_template-0.1.0-py3-none-any.whl` - Wheel distribution
 
@@ -223,6 +227,7 @@ git push origin main
 **Issue**: Build job fails with dependency errors
 
 **Solution**:
+
 ```bash
 # Test build locally first
 uv sync --extra dev
@@ -240,10 +245,12 @@ uv run python -m build
 **Issue**: Release has "See CHANGELOG.md for details"
 
 **Solution**: Add version section to CHANGELOG.md:
+
 ```markdown
 ## [0.2.0] - YYYY-MM-DD
 
 ### Added
+
 - New feature X
 ```
 

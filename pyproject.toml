@@ -80,3 +80,5 @@ ignore = ["E501", "B008", "ARG001", "ARG002"]
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
+# Python PEP 8 标准：4 空格缩进
+line-ending = "lf"

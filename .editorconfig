@@ -9,27 +9,47 @@ charset = utf-8
 end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
-indent_style = tab
+
+# Python files - PEP 8 标准
+[*.py]
+indent_style = space
 indent_size = 4
 
-# JSON files use tab indentation
+# JSON files - 业界主流标准
 [*.json]
-indent_style = tab
-indent_size = 4
+indent_style = space
+indent_size = 2
 
-# YAML files use tab indentation
+# YAML files - YAML 规范推荐
 [*.{yml,yaml}]
-indent_style = tab
-indent_size = 4
+indent_style = space
+indent_size = 2
 
-# Matches multiple files with brace expansion notation
-[*.{vue,js,ts,mjs,mts}]
-indent_style = tab
-indent_size = 4
-
-# Markdown files
+# Markdown files - 标准缩进
 [*.md]
+indent_style = space
+indent_size = 2
 trim_trailing_whitespace = false
+
+# Shell scripts - Google Shell Style Guide
+[*.sh]
+indent_style = space
+indent_size = 2
+
+# HTML files - W3C/Google/Airbnb 风格指南
+[*.html]
+indent_style = space
+indent_size = 2
+
+# XML files - 与 HTML 保持一致
+[*.xml]
+indent_style = space
+indent_size = 2
+
+# JavaScript/TypeScript files
+[*.{vue,js,ts,jsx,tsx,mjs,mts}]
+indent_style = space
+indent_size = 2
 
 # Makefile requires tabs
 [Makefile]

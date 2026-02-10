@@ -21,13 +21,13 @@
 
 ### 核心工具链
 
--   **编程语言**: Python 3.11+ (推荐 3.12)
--   **包管理**: uv (现代 Python 包管理器)
--   **代码质量**: Ruff (linting + formatting)
--   **测试框架**: pytest
--   **类型检查**: mypy (可选)
--   **容器化**: Docker
--   **文档**: Sphinx (可选)
+- **编程语言**: Python 3.11+ (推荐 3.12)
+- **包管理**: uv (现代 Python 包管理器)
+- **代码质量**: Ruff (linting + formatting)
+- **测试框架**: pytest
+- **类型检查**: mypy (可选)
+- **容器化**: Docker
+- **文档**: Sphinx (可选)
 
 ## 目录结构标准
 
@@ -112,13 +112,13 @@ my-python-project/
 
 #### **核心目录职责**
 
--   **config/**: 应用配置、环境变量管理
--   **core/**: 核心业务逻辑，不依赖外部服务
--   **services/**: 业务服务层，每个服务负责特定功能域
--   **api/**: API 路由和请求处理（Web 项目）
--   **cli/**: 命令行接口（CLI 项目）
--   **utils/**: 通用工具函数，可被多个模块使用
--   **models/**: 数据模型和业务实体
+- **config/**: 应用配置、环境变量管理
+- **core/**: 核心业务逻辑，不依赖外部服务
+- **services/**: 业务服务层，每个服务负责特定功能域
+- **api/**: API 路由和请求处理（Web 项目）
+- **cli/**: 命令行接口（CLI 项目）
+- **utils/**: 通用工具函数，可被多个模块使用
+- **models/**: 数据模型和业务实体
 
 ## 包管理与依赖管理
 
@@ -128,10 +128,10 @@ my-python-project/
 
 #### uv 优势
 
--   **极快的依赖解析**: 比 pip 快 10-100 倍
--   **兼容性强**: 完全兼容 pip 和 PyPI
--   **现代化**: 支持 PEP 621 标准和现代 Python 工作流
--   **虚拟环境管理**: 自动管理项目虚拟环境
+- **极快的依赖解析**: 比 pip 快 10-100 倍
+- **兼容性强**: 完全兼容 pip 和 PyPI
+- **现代化**: 支持 PEP 621 标准和现代 Python 工作流
+- **虚拟环境管理**: 自动管理项目虚拟环境
 
 #### 基本命令
 
@@ -436,34 +436,34 @@ uv run ruff check --fix && uv run ruff format
 
 ```json
 {
-	"tabWidth": 4,
-	"useTabs": true,
-	"printWidth": 120,
-	"singleQuote": true,
-	"proseWrap": "preserve",
-	"overrides": [
-		{
-			"files": ["*.json", "*.jsonc"],
-			"options": {
-				"trailingComma": "none"
-			}
-		},
-		{
-			"files": "manifest.json",
-			"options": {
-				"parser": "jsonc"
-			}
-		}
-	]
+  "tabWidth": 4,
+  "useTabs": true,
+  "printWidth": 120,
+  "singleQuote": true,
+  "proseWrap": "preserve",
+  "overrides": [
+    {
+      "files": ["*.json", "*.jsonc"],
+      "options": {
+        "trailingComma": "none"
+      }
+    },
+    {
+      "files": "manifest.json",
+      "options": {
+        "parser": "jsonc"
+      }
+    }
+  ]
 }
 ```
 
 #### 支持的文件类型
 
--   **Markdown**: `*.md`, `*.mdx`
--   **YAML**: `*.yml`, `*.yaml`
--   **JSON**: `*.json`
--   **配置文件**: `.prettierrc`, `.github/workflows/*.yml`
+- **Markdown**: `*.md`, `*.mdx`
+- **YAML**: `*.yml`, `*.yaml`
+- **JSON**: `*.json`
+- **配置文件**: `.prettierrc`, `.github/workflows/*.yml`
 
 ### EditorConfig 配置
 
@@ -507,25 +507,25 @@ trim_trailing_whitespace = false
 
 ```json
 {
-	"[python]": {
-		"editor.defaultFormatter": "charliermarsh.ruff",
-		"editor.formatOnSave": true,
-		"editor.codeActionsOnSave": {
-			"source.fixAll": "explicit",
-			"source.organizeImports": "explicit"
-		}
-	},
-	"[markdown]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode",
-		"editor.formatOnSave": true
-	},
-	"files.associations": {
-		"*.mdc": "markdown",
-		"*.env*": "dotenv"
-	},
-	"python.testing.pytestEnabled": true,
-	"python.testing.pytestArgs": ["tests"],
-	"python.terminal.activateEnvironment": true
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit"
+    }
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "files.associations": {
+    "*.mdc": "markdown",
+    "*.env*": "dotenv"
+  },
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestArgs": ["tests"],
+  "python.terminal.activateEnvironment": true
 }
 ```
 
@@ -533,17 +533,17 @@ trim_trailing_whitespace = false
 
 ```json
 {
-	"recommendations": [
-		"charliermarsh.ruff", // Python linting/formatting
-		"ms-python.python", // Python 支持
-		"ms-python.pylance", // Python 语言服务器
-		"ms-python.pytest", // pytest 支持
-		"esbenp.prettier-vscode", // Prettier 格式化
-		"tamasfe.even-better-toml", // TOML 支持
-		"redhat.vscode-yaml", // YAML 支持
-		"ms-vscode.vscode-json", // JSON 支持
-		"GitHub.vscode-pull-request-github" // GitHub 集成
-	]
+  "recommendations": [
+    "charliermarsh.ruff", // Python linting/formatting
+    "ms-python.python", // Python 支持
+    "ms-python.pylance", // Python 语言服务器
+    "ms-python.pytest", // pytest 支持
+    "esbenp.prettier-vscode", // Prettier 格式化
+    "tamasfe.even-better-toml", // TOML 支持
+    "redhat.vscode-yaml", // YAML 支持
+    "ms-vscode.vscode-json", // JSON 支持
+    "GitHub.vscode-pull-request-github" // GitHub 集成
+  ]
 }
 ```
 
@@ -551,20 +551,20 @@ trim_trailing_whitespace = false
 
 ```json
 {
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"name": "Run AlgPoints Server",
-			"type": "python",
-			"request": "launch",
-			"program": "run.py",
-			"console": "integratedTerminal",
-			"cwd": "${workspaceFolder}",
-			"env": {
-				"PYTHONPATH": "${workspaceFolder}/src"
-			}
-		}
-	]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run AlgPoints Server",
+      "type": "python",
+      "request": "launch",
+      "program": "run.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/src"
+      }
+    }
+  ]
 }
 ```
 
@@ -578,12 +578,12 @@ trim_trailing_whitespace = false
 
 ```yaml
 repos:
-    - repo: https://github.com/astral-sh/ruff-pre-commit
-      rev: v0.13.2
-      hooks:
-          - id: ruff
-            args: [--fix, --exit-non-zero-on-fix]
-          - id: ruff-format
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.13.2
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format
 ```
 
 #### 使用方法
@@ -660,35 +660,35 @@ exclude_lines = [
 name: Continuous Integration
 
 on:
-    push:
-        branches: [main, develop]
-    pull_request:
-        branches: [main, develop]
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
 
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                python-version: ['3.12']
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.12']
 
-        steps:
-            - uses: actions/checkout@v4
+    steps:
+      - uses: actions/checkout@v4
 
-            - name: Install uv
-              uses: astral-sh/setup-uv@v2
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
 
-            - name: Set up Python
-              run: uv python install ${{ matrix.python-version }}
+      - name: Set up Python
+        run: uv python install ${{ matrix.python-version }}
 
-            - name: Install dependencies
-              run: uv sync --all-extras
+      - name: Install dependencies
+        run: uv sync --all-extras
 
-            - name: Run tests
-              run: uv run pytest --cov=src --cov-report=xml
+      - name: Run tests
+        run: uv run pytest --cov=src --cov-report=xml
 
-            - name: Upload coverage
-              uses: codecov/codecov-action@v3
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
 ```
 
 #### 2. 安全扫描
@@ -700,16 +700,16 @@ name: Security Scan
 on: [push, pull_request]
 
 jobs:
-    security:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-            - name: Run Bandit security scan
-              run: uv run bandit -r src/
+      - name: Run Bandit security scan
+        run: uv run bandit -r src/
 
-            - name: Run Safety dependency check
-              run: uv run safety check
+      - name: Run Safety dependency check
+        run: uv run safety check
 ```
 
 #### 3. 容器构建
@@ -719,21 +719,21 @@ jobs:
 name: Docker Build
 
 on:
-    push:
-        tags: ['v*']
-        branches: [main]
+  push:
+    tags: ['v*']
+    branches: [main]
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-            - name: Build Docker image
-              run: docker build -t <your-app>:latest .
+      - name: Build Docker image
+        run: docker build -t <your-app>:latest .
 
-            - name: Push to registry
-              # 推送到容器仓库
+      - name: Push to registry
+        # 推送到容器仓库
 ```
 
 ### 分支管理策略
@@ -777,15 +777,15 @@ PATCH: 向下兼容的问题修正
 name: Release
 
 on:
-    push:
-        tags: ['v*']
+  push:
+    tags: ['v*']
 
 jobs:
-    release:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Build and release
-              # 自动构建和发布
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build and release
+        # 自动构建和发布
 ```
 
 ## 容器化与部署
@@ -840,17 +840,17 @@ CMD ["python", "-m", "<your-package>.main"]
 version: '3.8'
 
 services:
-    app:
-        build: .
-        ports:
-            - '8080:8080'
-        environment:
-            - PYTHONPATH=/app/src
-            - DEBUG=true
-        volumes:
-            - ./src:/app/src:ro
-            - ./tests:/app/tests:ro
-        command: uv run python -m <your-package>.main --reload
+  app:
+    build: .
+    ports:
+      - '8080:8080'
+    environment:
+      - PYTHONPATH=/app/src
+      - DEBUG=true
+    volumes:
+      - ./src:/app/src:ro
+      - ./tests:/app/tests:ro
+    command: uv run python -m <your-package>.main --reload
 ```
 
 ### 环境变量管理
@@ -886,28 +886,28 @@ SECRET_KEY=your-secret-key
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: my-app
+  name: my-app
 spec:
-    replicas: 3
-    selector:
-        matchLabels:
-            app: my-app
-    template:
-        metadata:
-            labels:
-                app: my-app
-        spec:
-            containers:
-                - name: my-app
-                  image: my-app:latest
-                  ports:
-                      - containerPort: 8080
-                  env:
-                      - name: DATABASE_URL
-                        valueFrom:
-                            secretKeyRef:
-                                name: app-secrets
-                                key: database-url
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-app
+          image: my-app:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: database-url
 ```
 
 ## 开发规范
@@ -954,11 +954,11 @@ def create_user(user_data: UserRequest) -> dict:
 
 #### 命名规范
 
--   **文件名**: `snake_case.py`
--   **类名**: `PascalCase`
--   **函数/变量**: `snake_case`
--   **常量**: `UPPER_SNAKE_CASE`
--   **私有方法**: `_leading_underscore`
+- **文件名**: `snake_case.py`
+- **类名**: `PascalCase`
+- **函数/变量**: `snake_case`
+- **常量**: `UPPER_SNAKE_CASE`
+- **私有方法**: `_leading_underscore`
 
 ### 文档规范
 
@@ -1121,10 +1121,10 @@ docker-compose -f docker-compose.dev.yml up
 
 本文档定义了现代 Python 项目的完整开发标准，涵盖了从代码编写到部署的各个环节。遵循这些标准将确保：
 
--   **代码质量**: 统一的格式化和质量检查
--   **开发效率**: 现代化工具链和自动化流程
--   **团队协作**: 清晰的规范和工作流程
--   **项目可维护性**: 标准化的结构和文档
+- **代码质量**: 统一的格式化和质量检查
+- **开发效率**: 现代化工具链和自动化流程
+- **团队协作**: 清晰的规范和工作流程
+- **项目可维护性**: 标准化的结构和文档
 
 ### 重要提醒
 

@@ -4,12 +4,12 @@ This document provides an overview of all GitHub Actions workflows in the py_tem
 
 ## Workflows Overview
 
-| Workflow | Trigger | Purpose | Status Badge |
-|----------|---------|---------|--------------|
-| [CI](#ci-workflow) | Push, PR | Run tests and checks | ![CI](https://github.com/your-org/py_template/workflows/Continuous%20Integration/badge.svg) |
-| [Code Quality](#code-quality-workflow) | Push, PR | Code quality checks | ![Code Quality](https://github.com/your-org/py_template/workflows/Code%20Quality/badge.svg) |
-| [Security](#security-workflow) | Push, PR, Schedule | Security scanning | ![Security](https://github.com/your-org/py_template/workflows/Security%20Scan/badge.svg) |
-| [Release](#release-workflow) | Tag push | Build and release | ![Release](https://github.com/your-org/py_template/workflows/Release/badge.svg) |
+| Workflow                               | Trigger            | Purpose              | Status Badge                                                                                |
+| -------------------------------------- | ------------------ | -------------------- | ------------------------------------------------------------------------------------------- |
+| [CI](#ci-workflow)                     | Push, PR           | Run tests and checks | ![CI](https://github.com/your-org/py_template/workflows/Continuous%20Integration/badge.svg) |
+| [Code Quality](#code-quality-workflow) | Push, PR           | Code quality checks  | ![Code Quality](https://github.com/your-org/py_template/workflows/Code%20Quality/badge.svg) |
+| [Security](#security-workflow)         | Push, PR, Schedule | Security scanning    | ![Security](https://github.com/your-org/py_template/workflows/Security%20Scan/badge.svg)    |
+| [Release](#release-workflow)           | Tag push           | Build and release    | ![Release](https://github.com/your-org/py_template/workflows/Release/badge.svg)             |
 
 ---
 
@@ -25,6 +25,7 @@ This document provides an overview of all GitHub Actions workflows in the py_tem
 ### Jobs
 
 #### 1. Test
+
 - **Python versions:** 3.12
 - **Steps:**
   1. Checkout code
@@ -62,6 +63,7 @@ git commit -m "docs: update README [skip ci]"
 ### Jobs
 
 #### 1. Code Quality
+
 - **Steps:**
   1. Checkout code
   2. Run Ruff linting (output to GitHub)
@@ -90,6 +92,7 @@ This workflow has some overlap with the CI workflow. Consider consolidating if m
 ### Jobs
 
 #### 1. Security Scan
+
 - **Permissions:** security-events (write), contents (read)
 - **Steps:**
   1. Checkout code
@@ -104,6 +107,7 @@ This workflow has some overlap with the CI workflow. Consider consolidating if m
 **Automatic:** Runs on every push/PR and weekly.
 
 **Manual trigger:**
+
 1. Go to Actions → Security Scan
 2. Click "Run workflow"
 3. Select branch
@@ -112,6 +116,7 @@ This workflow has some overlap with the CI workflow. Consider consolidating if m
 ### Viewing Reports
 
 Security reports are available as artifacts:
+
 1. Go to Actions → Select workflow run
 2. Scroll to "Artifacts" section
 3. Download `bandit-report`
@@ -140,12 +145,14 @@ uv run safety check
 ### Triggers
 
 #### 1. Tag Push (Recommended)
+
 ```bash
 git tag -a v0.2.0 -m "Release version 0.2.0"
 git push origin v0.2.0
 ```
 
 #### 2. Manual Workflow Dispatch
+
 - Go to Actions → Release
 - Click "Run workflow"
 - Enter version number (without 'v')
@@ -153,26 +160,31 @@ git push origin v0.2.0
 ### Jobs
 
 #### 1. Build Distribution
+
 - Build source distribution (`.tar.gz`)
 - Build wheel distribution (`.whl`)
 - Validate packages with `twine check`
 - Upload artifacts
 
 #### 2. Publish GitHub Release
+
 - Create GitHub release
 - Extract changelog from CHANGELOG.md
 - Upload distribution files
 - Tag release
 
 #### 3. Publish to PyPI (Optional, Commented)
+
 - Publish to PyPI
 - **Requires:** `PYPI_API_TOKEN` secret
 
 #### 4. Publish to Private Repository (Optional, Commented)
+
 - Publish to private package repository
 - **Requires:** Repository URL and credentials
 
 #### 5. Notify
+
 - Generate release summary
 - Update GitHub Step Summary
 - Send notifications (if configured)
@@ -249,8 +261,8 @@ For testing multiple Python versions:
 
 ```yaml
 strategy:
-    matrix:
-        python-version: ['3.11', '3.12']
+  matrix:
+    python-version: ['3.11', '3.12']
 ```
 
 ### 3. Fail Fast
@@ -259,9 +271,9 @@ Set `fail-fast: false` to see all failures:
 
 ```yaml
 strategy:
-    fail-fast: false
-    matrix:
-        python-version: ['3.11', '3.12']
+  fail-fast: false
+  matrix:
+    python-version: ['3.11', '3.12']
 ```
 
 ### 4. Use Conditionals
@@ -286,8 +298,8 @@ Grant minimum required permissions:
 
 ```yaml
 permissions:
-    contents: read
-    pull-requests: write
+  contents: read
+  pull-requests: write
 ```
 
 ---
@@ -299,6 +311,7 @@ permissions:
 **Problem:** Workflow doesn't run on push/PR
 
 **Solutions:**
+
 1. Check workflow file syntax (YAML)
 2. Verify trigger configuration matches branch name
 3. Check repository permissions
@@ -309,6 +322,7 @@ permissions:
 **Problem:** Build job fails
 
 **Solutions:**
+
 1. Test locally first: `uv run python -m build`
 2. Check dependency versions
 3. Review error logs in Actions tab
@@ -319,6 +333,7 @@ permissions:
 **Problem:** Workflow fails with permission error
 
 **Solutions:**
+
 1. Check Settings → Actions → Workflow permissions
 2. Enable "Read and write permissions"
 3. Add explicit permissions in workflow file
@@ -328,6 +343,7 @@ permissions:
 **Problem:** Secret is undefined
 
 **Solutions:**
+
 1. Verify secret name matches exactly
 2. Check repository vs organization secrets
 3. Ensure secret is set in correct repository
@@ -337,6 +353,7 @@ permissions:
 **Problem:** Codecov upload fails
 
 **Solutions:**
+
 1. Check Codecov token in secrets
 2. Verify coverage.xml is generated
 3. Review Codecov integration status
@@ -354,6 +371,7 @@ permissions:
 ### Workflow Insights
 
 View workflow insights:
+
 1. Actions → Select workflow
 2. Click "..." → View workflow insights
 3. See success rate, duration trends
@@ -380,6 +398,7 @@ Keep workflow actions up-to-date:
 ```
 
 Update action versions periodically:
+
 1. Check for new releases
 2. Review changelogs
 3. Test in feature branch

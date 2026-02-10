@@ -248,6 +248,7 @@ except TemplateError as e:
 ```
 
 **Output:**
+
 ```
 Processed record: id=1 name='Test' value=0.5
 Storage result: {'success': True, 'record_id': 1, 'total_records': 1}

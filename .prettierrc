@@ -1,21 +1,56 @@
 {
-	"tabWidth": 4,
-	"useTabs": true,
-	"printWidth": 120,
-	"singleQuote": true,
-	"proseWrap": "preserve",
-	"overrides": [
-		{
-			"files": ["*.json", "*.jsonc"],
-			"options": {
-				"trailingComma": "none"
-			}
-		},
-		{
-			"files": "manifest.json",
-			"options": {
-				"parser": "jsonc"
-			}
-		}
-	]
+  "printWidth": 120,
+  "singleQuote": true,
+  "proseWrap": "preserve",
+  "overrides": [
+    {
+      "files": ["*.json", "*.jsonc"],
+      "options": {
+        "tabWidth": 2,
+        "useTabs": false,
+        "trailingComma": "none"
+      }
+    },
+    {
+      "files": ["*.yml", "*.yaml"],
+      "options": {
+        "tabWidth": 2,
+        "useTabs": false
+      }
+    },
+    {
+      "files": ["*.md"],
+      "options": {
+        "tabWidth": 2,
+        "useTabs": false
+      }
+    },
+    {
+      "files": ["*.sh"],
+      "options": {
+        "tabWidth": 2,
+        "useTabs": false
+      }
+    },
+    {
+      "files": ["*.html", "*.xml"],
+      "options": {
+        "tabWidth": 2,
+        "useTabs": false
+      }
+    },
+    {
+      "files": ["*.js", "*.ts", "*.jsx", "*.tsx", "*.vue", "*.mjs", "*.mts"],
+      "options": {
+        "tabWidth": 2,
+        "useTabs": false
+      }
+    },
+    {
+      "files": "manifest.json",
+      "options": {
+        "parser": "jsonc"
+      }
+    }
+  ]
 }
