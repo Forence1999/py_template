@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(*)",
+      "Read",
+      "Edit",
+      "Write",
+      "MultiEdit",
+      "mcp__ide__getDiagnostics",
+      "mcp__ide__executeCode",
+      "WebSearch",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:www.builder.io)"
+    ]
+  }
+}

@@ -17,7 +17,7 @@
   // ========== Markdown Formatting Settings ==========
   "[markdown]": {
     "editor.tabSize": 2,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "dAnson.vscode-markdownlint",
     "editor.formatOnSave": true
   },
 
@@ -59,7 +59,11 @@
   // ========== File Associations ==========
   "files.associations": {
     "*.mdc": "markdown",
-    "*.env*": "dotenv"
+    "*.env*": "dotenv",
+    "SKILL.md": "markdown",
+    "skill.md": "markdown",
+    "**/SKILL.md": "markdown",
+    "**/skill.md": "markdown"
   },
 
   // ========== Python Testing ==========
@@ -70,10 +74,14 @@
   // ========== Code Runner ==========
   "code-runner.clearPreviousOutput": true,
   "code-runner.saveFileBeforeRun": true,
+  "code-runner.executorMap": {
+    "python": "uv run"
+  },
 
   // ========== Python Analysis ==========
-  "python.terminal.activateEnvironment": true,
-  "python.analysis.typeCheckingMode": "basic",
+  "python.terminal.activateEnvironment": false,
+  "python.analysis.typeCheckingMode": "off",
+  "python.analysis.runMode": "openFilesOnly",
   "python.analysis.diagnosticSeverityOverrides": {
     "reportUnknownParameterType": "none",
     "reportUnknownVariableType": "none",
